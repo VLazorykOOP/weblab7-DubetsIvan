@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Введення інформації про молочну продукцію</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        legend {
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea {
+            width: 98%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        /* Styles for the modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showMessage(action) {
+            alert(action);
+        }
+
+        function showModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function setProductType(type) {
+            const select = document.getElementById("productType");
+            select.value = type;
+            closeModal();
+            showMessage(`Оберіть тип: ${type}`);
+        }
+
+        function changeStyle(event) {
+            event.target.classList.toggle('highlight');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h1 
+    onclick="showMessage('Клік на заголовок')"
+    ondblclick="showMessage('Подвійний клік на заголовок')"
+    onmouseover="changeStyle(event)"
+    onmouseout="changeStyle(event)">Додати молочну продукцію</h1>
+
+<form action="/submit" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" novalidate>
+    <fieldset>
+        <legend>Основна інформація</legend>
+        
+        <label for="productName">Назва продукту:</label>
+        <input type="text" id="productName" name="productName" required placeholder="Введіть назву" maxlength="50" title="Введіть назву продукту" dir="ltr"
+               onclick="showMessage('Клік на поле Назва продукту')"
+               ondblclick="showMessage('Подвійний клік на поле Назва продукту')"
+               onmouseover="changeStyle(event)"
+               onmouseout="changeStyle(event)"><br>
+
+
+               <label for="productType">Тип продукту:</label>
+               <select id="productType" name="productType" required autofocus
+                       onclick="showModal()">
+                   <option value="" disabled selected>Оберіть тип</option>
+                   <option value="молоко">Молоко</option>
+                   <option value="йогурт">Йогурт</option>
+                   <option value="сир">Сир</option>
+                   <option value="масло">Масло</option>
+               </select>
+       
+               <label for="price">Ціна (грн):</label>
+               <input type="number" id="price" name="price" min="0" step="0.01" required title="Введіть ціну продукту"
+                      onclick="showMessage('Клік на поле Ціна')"
+                      ondblclick="showMessage('Подвійний клік на поле Ціна')"><br>
+       
+               <label for="quantity">Кількість (л):</label>
+               <input type="number" id="quantity" name="quantity" min="0" step="0.1" required title="Введіть кількість продукту"
+                      onclick="showMessage('Клік на поле Кількість')"
+                      ondblclick="showMessage('Подвійний клік на поле Кількість')"><br>
+       
+               <label for="description">Опис:</label>
+               <textarea id="description" name="description" rows="4" placeholder="Додайте опис продукту" required autofocus
+                         onclick="showMessage('Клік на поле Опис')"
+                         ondblclick="showMessage('Подвійний клік на поле Опис')"
+                         onmouseover="changeStyle(event)"
+                         onmouseout="changeStyle(event)"></textarea>
+           </fieldset>
+       
+           <fieldset>
+               <legend>Додаткові параметри</legend>
+       
+               <label for="expiration">Термін придатності:</label>
+               <input type="date" id="expiration" name="expiration" required
+                      onclick="showMessage('Клік на поле Термін придатності')"><br>
+       
+               <label for="imageUpload">Завантажити зображення:</label>
+               <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple
+                      onclick="showMessage('Клік на поле Завантажити зображення')"><br>
+           </fieldset>
+       
+           <button type="submit">Додати продукт</button>
+       </form>
+       
+       <!-- Модальне вікно для вибору типу продукту -->
+       <div id="myModal" class="modal">
+           <div class="modal-content">
+               <span class="close" onclick="closeModal()">&times;</span>
+               <h2>Оберіть тип продукту:</h2>
+           </div>
+       </div>
+       
+       </body>
+       </html>
+       

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<style>
+    body{
+        background-color: #5ba8eb;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    .menu{
+        margin: auto;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        background-color: #3d7fb8;
+        width: 350px;
+        height: 500px;
+        border-radius: 30px;
+    }
+    .logo{
+        margin: auto;
+        margin-top: 80px;
+        text-align: center;
+        color: white;
+        font-size: 34px;
+        font-weight: bold;
+    }
+    .menu_nav{
+        margin: auto;
+        margin-top: 0px;
+        border-radius: 25px;
+        width: 275px;
+        height: 300px;
+    }
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-left: -40px;
+        margin-top: 50px;
+    }
+    .button{
+        padding-top: 13px;
+        text-align: center;
+        background-color: white;
+        width: 100%;
+        height: 40px;
+        border-radius: 20px;
+        font-size: 22px;
+    }
+</style>
+<body>
+    <div class="menu">
+        <div class="logo">Молочний завод</br>"Корівка"</div>
+        <nav class="menu_nav">
+            <menu id="main" label="Головне меню">
+                <section class="buttons">
+                    <div class="button">
+                        <span>
+                            <a href="index.html" title="Головна">Головна сторінка</a>
+                        </span>
+                    </div>
+                    <div class="button">
+                        <span>
+                            <a href="about.html" title="Про нас">Про нас</a>
+                        </span>
+                    </div>
+                    <div class="button">
+                        <span>
+                            <a href="product.html" title="Продукція">Каталог</a>
+                        </span>
+                    </div>
+                    <div class="button">
+                        <span>
+                            <a href="info.html" title="Інформація">Інформація</a>
+                        </span>
+                    </div>
+                </section>
+            </menu>
+        </nav>
+    </div>
+</body>
+</html>

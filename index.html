@@ -1,12 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Script-Type" content="text/javascript" >
-    <title>Lab7</title>
+    <title>Web Lab # 1</title>
+    <script>
+        function pageLoaded() {
+            alert('Сторінка повністю завантажена!');
+        }
+    
+        function beforeUnload() {
+            alert('Користувач залишив сторінку!');
+        }
+    
+        function afterPrint() {
+            alert('Документ надруковано!');
+        }
+    
+        function beforePrint() {
+            alert('Документ буде надруковано!');
+        }
+    
+        function pageHidden() {
+            alert('Сторінка прихована!');
+        }
+    
+        function pageShown() {
+            alert('Сторінка знову відображається!');
+        }
+    
+        function windowResized() {
+            alert('Розміри вікна змінено!');
+        }
+    </script>
+    </head>
+    <body 
+    onload="pageLoaded()" 
+    onunload="beforeUnload()"
+    onafterprint="afterPrint()"
+    onbeforeprint="beforePrint()"
+    onpagehide="pageHidden()"
+    onpageshow="pageShown()"
+    onresize="windowResized()"
+    >    
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        a:hover {
+            color: #ffcc00;
+        }
+        .back {
+            height: 100%;
+            width: 1263px;
+            margin-left: -8px;
+            margin-top: -8px;
+        }
+        .header {
+                    background-color: #3d7fb8;
+                    display: flex;
+            height: 60px;
+            color: white;
+                    padding-left: 40px;
+                    padding-top: 25px;
+            font-size: 30px;
+                    margin-right: -17px;
+        }
+        .header a:first-child {
+            margin-right: 20px;
+        }
+        .pad {
+                            padding-right: 40px;
+        }
+        .pad:hover {
+            text-decoration: underline;
+        }
+        .content {
+            background-color: #5ba8eb;
+            height: 508px;
+            margin-bottom: -8px;
+            margin-right: -17px;
+        }
+        .name {
+            color: white;
+            font-size: 45px;
+            text-align: center;
+                    padding-top: 50px;
+        }
+        .name1 {
+            font-weight: bold;
+                    border-bottom: 2px solid white;
+        }
+        .info {
+                    display: flex;
+            color: white;
+            font-size: 45px;
+            text-align: center;
+                    padding-left: 265px;
+                    padding-top: 50px;
+        }       
+        .info1 {
+            font-weight: bold;
+            color: white;
+        }
+        .info2 {
+                            display: flex;
+            color: white;
+            font-size: 45px;
+            text-align: center;
+                    padding-top: 25px;
+        }
+        .txt         {
+            font-size: 30px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            padding: 15px;
+            border: 1px solid #fff;
+        }
+        .info1::after {
+            content: " 🏭";
+        }
+        .content:empty {
+            background-color: #f00;
+        }
+        .unused-styles {
+            /* Селектори атрибутів */
+            [attr] {
+               color: red;
+            }
+            [attr|=value] {
+                color: green;
+            }
+            [attr^=value] {
+                color: blue;
+            }
+
+            /* Псевдокласи */
+            :first-child {
+                font-weight: bold;
+            }
+            :in-range {
+                background-color: lightblue;
+            }
+            :empty {
+                display: none;
+            }
+            :first-of-type {
+                border: 2px solid black;
+            }
+            :last-of-type {
+                border-bottom: 2px solid red;
+            }
+
+            /* Псевдоелементи */
+            ::first-        line {
+                text-transform: uppercase;
+                   }        
+            ::after {
+                       content: "!";
+                  }
+
+            /* Границі, заповнювачі та рамки */
+            margin-bottom: 20px;
+                    margin-bottom: 10%;
+            margin-left: 30px;
+                    margin-left: 5%;
+            margin: 40px;
+            margin: 15%;
+            padding: 20px;
+            padding-left: 25px;
+            padding-bottom: 10px;
+            border-right-width: thin;
+            border-right-width: thick;
+            border-bottom-width: thin;
+            border-bottom-width: thick;
+            border-top-width: thin;
+            border-top-width: thick;
+            border-left-color: #333;
+            border-bottom-color: #444;
+            border-right-color: #555;
+            border-right-style: none;
+            border-right-style: ridge;
+            border-right-style: inset;
+            border-right-style: double;
+            border-left-style: none;
+            border-left-style: ridge;
+            border-left-style: inset;
+            border-left-style: double;
+            border-top-style: none;
+            border-top-style: ridge;
+            border-top-style: inset;
+            border-top-style: double;
+
+            /* Позиціювання елементів */
+            display: inline;
+            display: table-row;
+            display: compact;
+            display: block;
+            display: table-column-group;
+            display: table-header-group;
+            position: static;
+            position: relative;
+            z-index: auto;
+            float: left;
+            float: none;
+            clear: none;
+            clear: left;
+            direction: ltr;
+            unicode-bidi: normal;
+            unicode-bidi: bidi-override;
+
+            /* Візуалізація елементів */
+            max-width: 100%;
+            width: 80%;
+            height: 200px;
+            height: 50%;
+            max-height: 500px;
+            max-height: 90%;
+            line-height: normal;
+            line-height: 1.5;
+            vertical-align: baseline;
+            vertical-align: bottom;
+            vertical-align: super;
+            vertical-align: text-top;
+            overflow: visible;
+            overflow: scroll;
+            clip: rect(0px, 100px, 50px, 0px);
+            visibility: visible;
+            visibility: hidden;
+            outline-width: 1px;
+            outline: solid 2px red;
+                    
+            /* Колір фону */
+            color: #000;
+            background-color: #f5f5f5;
+            background-image: url('image.png');
+            background-attachment: scroll;
+            background-position: left;
+            background-position: bottom;
+}
+
+    </style>
 </head>
 <body>
-    <h1> !!! Додайте свої сторінки сайту створені в лаб. роботах 1-6  </h1>
+    <div class="back">
+        <div class="header">
+            <div class="pad"><a href="about.html"> Про завод </a></div>
+            <div class="pad"><a href="product.html"> Продукція </a></div>
+            <div class="pad"><a href="info.html"> Інформація </a></div>
+            <div class="pad"><a href="menu.html"> Меню </a></div>
+        </div>
+        <div class="content">
+            <div class="name">
+                <div> Молочний завод </div>
+                <div class="name1"> "Корівка" </div>
+            </div>
+            <table style="width: 100%; text-align: center; font-size: 16px; margin-top: 50px;">
+                <tr>
+                    <td>
+                        <div class="info1">
+                            <div class="txt">450<br>Працівників</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="info1">
+                            <div class="txt">510<br>Позицій</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="info1">
+                            <div class="txt">99%<br>Виробів доставляємо через<br>власний логістичний центр</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="info1">
+                            <div class="txt">350<br>Міст України споживають<br>нашу продукцію</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>            
+        </div>
+    </div>
 </body>
 </html>

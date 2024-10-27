@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Введення інформації про молочну продукцію</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        legend {
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea {
+            width: 98%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+    <script>
+        function runTask() {
+            const formElements = document.forms[0].elements;
+            let elementList = "Елементи форми:\n";
+
+            for (let i = 0; i < formElements.length; i++) {
+                const element = formElements[i];
+                elementList += `ID: ${element.id}, Назва: ${element.name}, Тип: ${element.type}\n`;
+            }
+            alert(elementList);
+        }
+    </script>
+</head>
+<body>
+
+<h1>Додати молочну продукцію</h1>
+
+<form action="/submit" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" novalidate>
+    <fieldset>
+        <legend>Основна інформація</legend>
+        
+        <label for="productName">Назва продукту:</label>
+        <input type="text" id="productName" name="productName" required placeholder="Введіть назву" maxlength="50" title="Введіть назву продукту" dir="ltr"><br>
+
+        <label for="productType">Тип продукту:</label>
+        <select id="productType" name="productType" required autofocus>
+            <option value="" disabled selected>Оберіть тип</option>
+            <option value="молоко">Молоко</option>
+            <option value="йогурт">Йогурт</option>
+            <option value="сир">Сир</option>
+            <option value="масло">Масло</option>
+        </select>
+
+        <label for="price">Ціна (грн):</label>
+        <input type="number" id="price" name="price" min="0" step="0.01" required title="Введіть ціну продукту"><br>
+
+        <label for="quantity">Кількість (л):</label>
+        <input type="number" id="quantity" name="quantity" min="0" step="0.1" required title="Введіть кількість продукту"><br>
+
+        <label for="description">Опис:</label>
+        <textarea id="description" name="description" rows="4" placeholder="Додайте опис продукту" required autofocus></textarea>
+    </fieldset>
+
+    <fieldset>
+        <legend>Додаткові параметри</legend>
+
+        <label for="expiration">Термін придатності:</label>
+        <input type="date" id="expiration" name="expiration" required><br>
+
+        <label for="imageUpload">Завантажити зображення:</label>
+        <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple><br>
+    </fieldset>
+
+    <button type="button" onclick="runTask()">Run Task</button>
+    <button type="submit">Додати продукт</button>
+</form>
+</body>
+</html>

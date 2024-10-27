@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пошук інформації</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 300px;
+        }
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Форма для пошуку інформації</h1>
+    <input type="text" id="textInput" placeholder="Введіть текст">
+    <button id="searchButton" onclick="analyzeText()">Пошук інформації</button>
+    <div class="results" id="results"></div>
+
+    <script>
+        function analyzeText() {
+            const text = document.getElementById("textInput").value.trim();
+
+            if (!text) {
+                document.getElementById("results").innerHTML = "Будь ласка, введіть текст.";
+                return;
+            }
+
+            const words = text.match(/[а-яА-ЯіІєЄ]+/g);
+            const wordCount = words ? words.length : 0;
+            const digits = text.match(/\d/g);
+            const digitCount = digits ? digits.length : 0;
+
+            const integers = text.match(/\b\d+\b/g);
+            const integerCount = integers ? integers.length : 0;
+
+            const wordsArray = text.split(/\s+/);
+            const foundWords = [];
+
+            wordsArray.forEach(word => {
+                const cleanedWord = word.replace(/[.,!?;]/g, '');
+                if (cleanedWord.startsWith('р') || cleanedWord.startsWith('Р') && cleanedWord.endsWith('и') || cleanedWord.startsWith('И')) {
+                    foundWords.push(cleanedWord);
+                }
+            });
+
+            const foundWordsOutput = foundWords.length > 0 ? foundWords.join(', ') : 'Слів не знайдено.';
+
+            const results = `
+                Кількість слів: ${wordCount}<br>
+                Кількість цифр: ${digitCount}<br>
+                Кількість цілих чисел: ${integerCount}<br>
+                Слова, що починаються на 'р' і закінчуються на 'и': ${foundWordsOutput}
+            `;
+
+            document.getElementById("results").innerHTML = results;
+        }
+    </script>
+</body>
+</html>

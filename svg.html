@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Coordinate Plane with Shapes and Borders</title>
+</head>
+<body>
+    <main style="text-align: center;">
+        <svg height="500px" width="1440px" viewBox="180 -10 500 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrowhead" markerWidth="12" markerHeight="8" 
+                        refX="8" refY="4" orient="auto">
+                    <polygon points="0 0, 12 4, 0 8" fill="black" />
+                </marker>
+            </defs>
+
+            <line x1="0" y1="150" x2="600" y2="150" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+            <line x1="100" y1="400" x2="100" y2="-400" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+
+            <path id="textPath" d="M 150 300 Q 300 200, 600 400 Q 750 500, 900 300 Q 1050 100, 1200 200" fill="transparent" stroke="none"/>
+
+            <text fill="black" font-size="20" font-family="Arial">
+                <textPath href="#textPath" startOffset="50%">
+                    Дубець Іван
+                </textPath>
+            </text>
+
+            <rect x="300" y="0" width="50" height="50" fill="blue" stroke="none">
+                <animate attributeName="fill" values="blue;red;yellow;blue" dur="2s" repeatCount="indefinite" />
+            </rect>
+            <rect x="100" y="50" width="50" height="50" fill="blue" stroke="none">
+                <animate attributeName="x" from="100" to="200" dur="2s" begin="0s" repeatCount="indefinite" />
+            </rect>
+            <rect x="150" y="0" width="50" height="50" fill="blue" stroke="none">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 175 25" to="360 175 25" dur="2s" repeatCount="indefinite" />
+            </rect>
+            <rect x="350" y="50" width="50" height="50" fill="blue" stroke="none">
+                <animate attributeName="width" from="50" to="100" dur="2s" repeatCount="indefinite" />
+            </rect>
+            <rect x="150" y="300" width="50" height="50" fill="blue" stroke="none">
+                <animateTransform attributeName="transform" attributeType="XML" type="skewX" from="0" to="20" dur="2s" repeatCount="indefinite" />
+            </rect>
+            <rect x="300" y="300" width="50" height="50" fill="blue" stroke="none" />
+
+            <rect x="200" y="250" width="100" height="50" fill="blue" stroke="none">
+                <animate attributeName="fill" values="blue;green;purple;blue" dur="2s" repeatCount="indefinite" />
+            </rect>
+            
+            <circle cx="200" cy="200" r="50" fill="blue" stroke="none">
+                <animate attributeName="cy" from="200" to="250" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="300" cy="200" r="50" fill="blue" stroke="none">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 300 200" to="360 300 200" dur="2s" repeatCount="indefinite" />
+            </circle>
+            
+            <ellipse cx="250" cy="100" rx="100" ry="50" fill="blue" stroke="none">
+                <animate attributeName="rx" from="100" to="150" dur="2s" repeatCount="indefinite" />
+            </ellipse>
+        </svg>
+    </main>
+</body>
+</html>
