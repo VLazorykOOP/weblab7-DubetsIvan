@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing with Animation</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <canvas id="myCanvas" width="1440" height="500"></canvas>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let isPaused = false;  // Variable to track animation state
+
+        function drawAxes() {
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, 150);
+            ctx.lineTo(600, 150);
+            ctx.moveTo(100, 0);
+            ctx.lineTo(100, 500);
+            ctx.stroke();
+        }
+
+        function drawTextAlongPath(text) {
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.textBaseline = 'middle';
+            ctx.save();
+            ctx.translate(150, 300);
+            ctx.rotate(Math.PI / 4);
+            ctx.fillText(text, 0, 0);
+            ctx.restore();
+        }
+
+        function drawAnimatedRectangles() {
+            const time = Date.now() * 0.002;
+            ctx.fillStyle = `hsl(${(time * 60) % 360}, 100%, 50%)`;
+            ctx.fillRect(300, 0, 50, 50);
+            ctx.fillStyle = 'blue';
+            const x = 100 + Math.sin(time) * 100;
+            ctx.fillRect(x, 50, 50, 50);
+            ctx.save();
+            ctx.translate(175, 25);
+            ctx.rotate(time);
+            ctx.fillRect(-25, -25, 50, 50);
+            ctx.restore();
+            ctx.save();
+            ctx.transform(1, 0, Math.sin(time) * 0.1, 1, 150, 300);
+            ctx.fillRect(0, 0, 50, 50);
+            ctx.restore();
+            const width = 50 + Math.abs(Math.sin(time)) * 50;
+            ctx.fillRect(200, 250, width, 50);
+            ctx.fillRect(300, 300, 50, 50);
+        }
+
+        function drawAnimatedCircles() {
+            ctx.fillStyle = 'blue';
+            const cy1 = 200 + Math.sin(Date.now() * 0.002) * 50;
+            ctx.beginPath();
+            ctx.arc(200, cy1, 50, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.save();
+            ctx.translate(300, 200);
+            ctx.rotate(Date.now() * 0.002);
+            ctx.beginPath();
+            ctx.arc(0, 0, 50, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawAnimatedEllipse() {
+            ctx.save();
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            const rx = 100 + Math.abs(Math.sin(Date.now() * 0.002)) * 50;
+            ctx.ellipse(250, 100, rx, 50, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawAxes();
+            drawAnimatedRectangles();
+            drawAnimatedCircles();
+            drawAnimatedEllipse();
+            if (!isPaused) {
+                requestAnimationFrame(draw);
+            }
+        }
+
+        canvas.addEventListener('click', () => {
+            isPaused = !isPaused;
+            if (!isPaused) {
+                draw();
+            }
+        });
+
+        draw();
+    </script>
+</body>
+</html>
